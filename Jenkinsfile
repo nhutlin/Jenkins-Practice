@@ -35,5 +35,27 @@ pipeline {
                 }
             }
         }
+        // stage('Prepare Docker Compose') {
+        //     steps {
+        //         script {
+        //             sh """
+        //             echo "MONGO_USERNAME=${MONGO_USERNAME}" > .env
+        //             echo "MONGO_PASSWORD=${MONGO_PASSWORD}" >> .env
+        //             echo "MONGO_CLUSTER=${MONGO_CLUSTER}" >> .env
+        //             echo "MONGO_DBNAME=${MONGO_DBNAME}" >> .env
+        //             echo "ACCESS_TOKEN=${ACCESS_TOKEN}" >> .env
+        //             """
+        //             sh "cat .env"
+        //         }
+        //     }
+        // }
+        
+        stage('Start Services with Docker Compose') {
+            steps {
+                script {
+                    sh "docker-compose -f docker-compose.yml up -d"
+                }
+            }
+        }
     }
 }

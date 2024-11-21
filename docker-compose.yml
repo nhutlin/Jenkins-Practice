@@ -2,8 +2,7 @@ version: '3'
 services:
   user_service:
     container_name: user_service
-    build:
-      context: ./User
+    image: ${URL_REGISTRY}/${ECR_REPO}:user_service
     ports:
       - "9001:9001"
     # env_file:
@@ -15,12 +14,11 @@ services:
       - MONGO_USERNAME=${MONGO_USERNAME}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - MONGO_CLUSTER=${MONGO_CLUSTER}
-      - MONGO_DBNAME=${MONGO_DBNAME}
+      - MONGO_DBNAME=${MONGO_DBNAME_USER}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
   cart_service:
     container_name: cart_service
-    build:
-      context: ./Cart
+    image: ${URL_REGISTRY}/${ECR_REPO}:cart_service
     ports:
       - "9003:9003"
     # env_file:
@@ -32,13 +30,12 @@ services:
       - MONGO_USERNAME=${MONGO_USERNAME}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - MONGO_CLUSTER=${MONGO_CLUSTER}
-      - MONGO_DBNAME=${MONGO_DBNAME}
+      - MONGO_DBNAME=${MONGO_DBNAME_CART}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
 
   product_service:
     container_name: product_service
-    build:
-      context: ./Product
+    image: ${URL_REGISTRY}/${ECR_REPO}:product_service
     ports:
       - "9000:9000"
     command: npm run start
@@ -50,12 +47,11 @@ services:
       - MONGO_USERNAME=${MONGO_USERNAME}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - MONGO_CLUSTER=${MONGO_CLUSTER}
-      - MONGO_DBNAME=${MONGO_DBNAME}
+      - MONGO_DBNAME=${MONGO_DBNAME_PRODUCT}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
   front-end:
     container_name: front-end
-    build:
-      context: ./front-end
+    image: ${URL_REGISTRY}/${ECR_REPO}:frontend
     ports:
       - "5173:5173"
     env_file:
