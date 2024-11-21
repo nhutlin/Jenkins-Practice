@@ -2,8 +2,6 @@ import { Fragment, useState } from "react";
 import "../Style/Login.css";
 import Alert from "../component/Alert";
 
-const user_service = import.meta.env.USER_URL;
-
 function Login() {
 
 
@@ -13,7 +11,7 @@ function Login() {
     event.preventDefault();
     
     try {
-      const response = await fetch("https://user.group18.site/users/login", {
+      const response = await fetch("https://user-service-stag.group18.site/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

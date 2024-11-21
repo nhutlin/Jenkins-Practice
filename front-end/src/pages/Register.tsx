@@ -1,8 +1,6 @@
 import "../Style/Register.css";
 import { useState } from "react";
 
-const user_service = import.meta.env.USER_URL;
-
 function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,7 +15,7 @@ function Register() {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://user.group18.site/users", {
+      const response = await fetch("https://user-service-stag.group18.site/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -55,7 +53,7 @@ function Register() {
     <div className="bg-img">
       <div className="registerContent">
         <header>Register Form</header>
-        <form action={"https://user.group18.site/users"} method="post" onSubmit={handleSubmit}>
+        <form action={"https://user-service-stag.group18.site/users"} method="post" onSubmit={handleSubmit}>
           <div className="row">
             <div className="col">
               <h6>First name</h6>

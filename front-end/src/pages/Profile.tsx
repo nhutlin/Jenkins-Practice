@@ -11,7 +11,6 @@ import profileg from "../assets/profileGirl.jpg";
 import { useState, useEffect, Fragment } from "react";
 
 
-const user_service = import.meta.env.USER_URL;
 
 function Profile() {
 
@@ -21,7 +20,7 @@ function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("https://user.group18.site/users/", {
+      fetch("https://user-service-stag.group18.site/users/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
