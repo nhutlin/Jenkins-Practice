@@ -54,8 +54,8 @@ services:
     image: ${URL_REGISTRY}/${ECR_REPO}:frontend
     ports:
       - "5173:5173"
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     command: npm run dev
     networks:
       - app-network
