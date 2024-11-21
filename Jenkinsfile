@@ -53,7 +53,7 @@ pipeline {
         stage('Start Services with Docker Compose') {
             steps {
                 script {
-                    sh "docker-compose -f docker-compose.yml up -d"
+                    sh "docker compose -f docker-compose.yml up -d"
                 }
             }
         }
