@@ -8,8 +8,6 @@ services:
     # env_file:
     #   - .env
     command: npm run start
-    networks:
-      - app-network
     environment:
       - MONGO_USERNAME=${MONGO_USERNAME}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
@@ -24,8 +22,6 @@ services:
     # env_file:
     #   - .env
     command: npm run start 
-    networks:
-      - app-network
     environment:
       - MONGO_USERNAME=${MONGO_USERNAME}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
@@ -41,8 +37,6 @@ services:
     command: npm run start
     # env_file:
     #   - .env
-    networks:
-      - app-network
     environment:
       - MONGO_USERNAME=${MONGO_USERNAME}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
@@ -57,8 +51,4 @@ services:
     # env_file:
     #   - .env
     command: npm run dev
-    networks:
-      - app-network
-networks:
-  app-network:
-    external: true
+
