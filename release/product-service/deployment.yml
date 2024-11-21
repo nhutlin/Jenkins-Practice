@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: product-service
+          image:  982534381318.dkr.ecr.ap-southeast-2.amazonaws.com"/group18/devops_project:product_service
+          resources:
+            requests:
+              cpu: 10m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 500Mi
+          command: ["/bin/sh", "-c"]
+          args: ["npm run start"]
+          envFrom:
+            - secretRef:
+                name: product-service-secret

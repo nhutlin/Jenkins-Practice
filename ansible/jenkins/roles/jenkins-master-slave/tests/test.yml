@@ -1,0 +1,6 @@
+---
+- name: Configure Jenkins Master-Slave setup
+  hosts: all
+  roles:
+    - jenkins-master-slave
+

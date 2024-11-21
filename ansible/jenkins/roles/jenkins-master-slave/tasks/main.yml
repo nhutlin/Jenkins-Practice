@@ -1,0 +1,61 @@
+---
+- name: Update APT cache
+  apt:
+    update_cache: yes
+
+- name: Install required packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - openjdk-{{ java_version }}-jdk
+    - wget
+
+- name: Add Jenkins repository key
+  apt_key:
+    url: https://pkg.jenkins.io/debian/jenkins.io.key
+    state: present
+
+- name: Add Jenkins repository
+  apt_repository:
+    repo: "deb https://pkg.jenkins.io/debian binary/"
+    state: present
+
+- name: Install Jenkins
+  apt:
+    name: jenkins
+    state: present
+
+- name: Start and enable Jenkins service
+  systemd:
+    name: jenkins
+    state: started
+    enabled: true
+
+- name: Create Jenkins slave directory
+  file:
+    path: /var/lib/jenkins/slave
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: '0755'
+
+- name: Download slave.jar
+  get_url:
+    url: "http://{{ master_ip }}:8080/jnlpJars/slave.jar"
+    dest: "{{ slave_jar_path }}"
+    owner: jenkins
+    group: jenkins
+    mode: '0755'
+
+- name: Configure Jenkins Master (only for master)
+  when: inventory_hostname in groups['jenkins_master']
+  block:
+    - name: Install Jenkins plugins
+      command: java -jar /usr/lib/jenkins/jenkins-cli.jar -s http://localhost:8080/ install-plugin {{ item }}
+      with_items:
+        - ssh-slaves
+        - workflow-aggregator
+
+    - name: Reload Jenkins configuration
+      command: java -jar /usr/lib/jenkins/jenkins-cli.jar -s http://localhost:8080/ reload-configuration

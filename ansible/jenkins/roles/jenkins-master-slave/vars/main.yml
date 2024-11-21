@@ -1,0 +1,4 @@
+---
+# vars file for roles/jenkins-master-slave
+master_ip: "54.161.234.57"
+slave_ip: "35.169.57.233"

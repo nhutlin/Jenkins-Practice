@@ -1,0 +1,7 @@
+---
+# handlers file for roles/jenkins-master-slave
+---
+- name: Restart Jenkins
+  systemd:
+    name: jenkins
+    state: restarted

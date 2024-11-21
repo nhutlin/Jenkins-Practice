@@ -1,0 +1,68 @@
+version: '3'
+services:
+  user_service:
+    container_name: user_service
+    build:
+      context: ./User
+    ports:
+      - "9001:9001"
+    # env_file:
+    #   - .env
+    command: npm run start
+    networks:
+      - app-network
+    environment:
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_CLUSTER=${MONGO_CLUSTER}
+      - MONGO_DBNAME=${MONGO_DBNAME}
+      - ACCESS_TOKEN=${ACCESS_TOKEN}
+  cart_service:
+    container_name: cart_service
+    build:
+      context: ./Cart
+    ports:
+      - "9003:9003"
+    # env_file:
+    #   - .env
+    command: npm run start 
+    networks:
+      - app-network
+    environment:
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_CLUSTER=${MONGO_CLUSTER}
+      - MONGO_DBNAME=${MONGO_DBNAME}
+      - ACCESS_TOKEN=${ACCESS_TOKEN}
+
+  product_service:
+    container_name: product_service
+    build:
+      context: ./Product
+    ports:
+      - "9000:9000"
+    command: npm run start
+    # env_file:
+    #   - .env
+    networks:
+      - app-network
+    environment:
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_CLUSTER=${MONGO_CLUSTER}
+      - MONGO_DBNAME=${MONGO_DBNAME}
+      - ACCESS_TOKEN=${ACCESS_TOKEN}
+  front-end:
+    container_name: front-end
+    build:
+      context: ./front-end
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env
+    command: npm run dev
+    networks:
+      - app-network
+networks:
+  app-network:
+    external: true

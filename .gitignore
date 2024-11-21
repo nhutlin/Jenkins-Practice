@@ -1,0 +1,5 @@
+node_modules/
+.env
+terraform/jenkins/.terraform
+terraform/jenkins/terraform.tfstate.backup
+terraform/jenkins/.terraform.lock.hcl
