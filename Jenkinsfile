@@ -13,18 +13,14 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Install Sonar Scanner') {
-            steps {
-                sh 'apt-get update && apt-get install -y sonar-scanner'
-            }
-        }
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                 sh "sonar-scanner \
-                -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} \
-                -Dsonar.sources=. \
-                -Dsonar.host.url= http://sonar-stag.group18.site \
+                    -Dsonar.projectKey=DevOps_Project \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url= https://sonar-stag.group18.site \
+                    -Dsonar.token=${SONAR_PROJECT_KEY}
                 "
                 }
             }
