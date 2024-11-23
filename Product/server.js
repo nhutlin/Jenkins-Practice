@@ -10,10 +10,11 @@ const port = process.env.PORT || 9000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-router.get("/", (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); // Hoặc cấu hình cụ thể
-    res.json({ message: "Products endpoint" });
-  });
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use("/products", require("./routes/productRouter"))
 app.use("/filter", require("./routes/filterRouter"))
 
