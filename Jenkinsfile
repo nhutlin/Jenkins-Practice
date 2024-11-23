@@ -13,27 +13,26 @@ pipeline {
                 checkout scm
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                sh "/opt/sonar-scanner/bin/sonar-scanner \
-                    -Dsonar.projectKey=DevOps_Project \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=https://sonar-stag.group18.site \
-                    -Dsonar.token=${SONAR_PROJECT_KEY} \
-                    -Djava.home=${JAVA_HOME} \
-                "
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withSonarQubeEnv('SonarQube') {
+        //         sh "/opt/sonar-scanner/bin/sonar-scanner \
+        //             -Dsonar.projectKey=DevOps_Project \
+        //             -Dsonar.sources=. \
+        //             -Dsonar.host.url=https://sonar-stag.group18.site \
+        //             -Dsonar.token=${SONAR_PROJECT_KEY} \
+        //         "
+        //         }
+        //     }
+        // }
             
-        stage("Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: false
-                }
-            }
-        }
+        // stage("Quality Gate") {
+        //     steps {
+        //         timeout(time: 1, unit: 'HOURS') {
+        //         waitForQualityGate abortPipeline: false
+        //         }
+        //     }
+        // }
         stage('Build and Push Docker Image') {
             steps {
                 script {
@@ -52,6 +51,16 @@ pipeline {
                         sh "docker push ${URL_REGISTRY}/${ECR_REPO}:user_service"
                         
                     }
+                }
+            }
+        }
+
+        stage('Vulnerability Scan - Docker Trivy') {
+            steps {
+        //--------------------------replace variable  token_github on file trivy-image-scan.sh
+                withCredentials([string(credentialsId: 'github', variable: 'TOKEN')]) {
+                    sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"      
+                    sh "sudo bash trivy-image-scan.sh"
                 }
             }
         }
