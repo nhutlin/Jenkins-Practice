@@ -13,6 +13,11 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Install Sonar Scanner') {
+            steps {
+                sh 'apt-get update && apt-get install -y sonar-scanner'
+            }
+        }
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
