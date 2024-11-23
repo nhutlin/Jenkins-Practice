@@ -5,6 +5,7 @@ services:
     image: ${URL_REGISTRY}/${ECR_REPO}:user_service
     ports:
       - "9001:9001"
+    restart: always
     # env_file:
     #   - .env
     command: npm run start
@@ -19,6 +20,7 @@ services:
     image: ${URL_REGISTRY}/${ECR_REPO}:cart_service
     ports:
       - "9003:9003"
+    restart: always
     # env_file:
     #   - .env
     command: npm run start 
@@ -34,6 +36,7 @@ services:
     image: ${URL_REGISTRY}/${ECR_REPO}:product_service
     ports:
       - "9000:9000"
+    restart: always
     command: npm run start
     # env_file:
     #   - .env
@@ -50,5 +53,6 @@ services:
       - "5173:5173"
     # env_file:
     #   - .env
+    restart: always
     command: npm run dev
 
