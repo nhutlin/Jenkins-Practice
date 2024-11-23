@@ -15,6 +15,9 @@ services:
       - MONGO_CLUSTER=${MONGO_CLUSTER}
       - MONGO_DBNAME=${MONGO_DBNAME_USER}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
+    networks:
+      - app_network
+
   cart_service:
     container_name: cart_service
     image: ${URL_REGISTRY}/${ECR_REPO}:cart_service
@@ -30,6 +33,8 @@ services:
       - MONGO_CLUSTER=${MONGO_CLUSTER}
       - MONGO_DBNAME=${MONGO_DBNAME_CART}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
+    networks:
+      - app_network
 
   product_service:
     container_name: product_service
@@ -46,6 +51,9 @@ services:
       - MONGO_CLUSTER=${MONGO_CLUSTER}
       - MONGO_DBNAME=${MONGO_DBNAME_PRODUCT}
       - ACCESS_TOKEN=${ACCESS_TOKEN}
+    networks:
+      - app_network
+
   front-end:
     container_name: front-end
     image: ${URL_REGISTRY}/${ECR_REPO}:frontend
@@ -55,4 +63,11 @@ services:
     #   - .env
     restart: always
     command: npm run dev
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
 
