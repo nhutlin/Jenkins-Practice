@@ -21,7 +21,7 @@ pipeline {
                     -Dsonar.sources=. \
                     -Dsonar.host.url=https://sonar-stag.group18.site \
                     -Dsonar.token=${SONAR_PROJECT_KEY} \
-                    -Djava.home=$JAVA_HOME \
+                    -Djava.home=${JAVA_HOME} \
                 "
                 }
             }
