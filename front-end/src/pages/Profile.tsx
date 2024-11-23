@@ -20,7 +20,7 @@ function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("https://user-service-stag.group18.site/users/", {
+      fetch("http://34.198.237.73:9001/users/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

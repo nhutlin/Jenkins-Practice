@@ -35,17 +35,22 @@ pipeline {
                 }
             }
         }
-        // stage('Prepare Docker Compose') {
+        // stage('SonarQube Analysis') {
         //     steps {
-        //         script {
-        //             sh """
-        //             echo "MONGO_USERNAME=${MONGO_USERNAME}" > .env
-        //             echo "MONGO_PASSWORD=${MONGO_PASSWORD}" >> .env
-        //             echo "MONGO_CLUSTER=${MONGO_CLUSTER}" >> .env
-        //             echo "MONGO_DBNAME=${MONGO_DBNAME}" >> .env
-        //             echo "ACCESS_TOKEN=${ACCESS_TOKEN}" >> .env
-        //             """
-        //             sh "cat .env"
+        //         withSonarQubeEnv('SonarQube') {
+        //         sh "sonar-scanner \
+        //         -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+        //         -Dsonar.sources=. \
+        //         -Dsonar.host.url=http://192.168.30.113:9000 \
+        //         "
+        //         }
+        //     }
+        // }
+            
+        // stage("Quality Gate") {
+        //     steps {
+        //         timeout(time: 1, unit: 'HOURS') {
+        //         waitForQualityGate abortPipeline: false
         //         }
         //     }
         // }
@@ -53,6 +58,7 @@ pipeline {
         stage('Start Services with Docker Compose') {
             steps {
                 script {
+                    sh "docker system prune -af && docker compose down"
                     sh "docker compose -f docker-compose.yml up -d"
                 }
             }
