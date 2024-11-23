@@ -13,7 +13,7 @@ function submitHandler(){
   const token = localStorage.getItem("token");
 
   if (token) { 
-    fetch("http://34.198.237.73:9003/cart/checkout", {
+    fetch("https://cart-service-stag.group18.site/cart/checkout", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

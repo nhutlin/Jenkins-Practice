@@ -18,7 +18,7 @@ function Cart() {
           return;
         }
 
-        const response = await fetch("http://34.198.237.73:9003/cart", {
+        const response = await fetch("https://cart-service-stag.group18.site/cart", {
           headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + token,

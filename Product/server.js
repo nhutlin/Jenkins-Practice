@@ -7,14 +7,16 @@ require('dotenv').config();
 require('./config/db_conn');
 const port = process.env.PORT || 9000;
 
-app.use(cors());
+const corsOptions = {
+    origin: '*',
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
 app.use("/products", require("./routes/productRouter"))
 app.use("/filter", require("./routes/filterRouter"))
 

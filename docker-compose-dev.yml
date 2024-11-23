@@ -1,0 +1,65 @@
+version: '3'
+services:
+  user_service:
+    container_name: user_service
+    build:
+      context: ./User
+      dockerfile: Dockerfile
+    ports:
+      - "9001:9001"
+    restart: always
+    env_file:
+      - .env
+    command: npm run start
+    networks:
+      - app_network
+
+  cart_service:
+    container_name: cart_service
+    build:
+      context: ./Cart
+      dockerfile: Dockerfile
+    ports:
+      - "9003:9003"
+    restart: always
+    env_file:
+      - .env
+    command: npm run start 
+
+    networks:
+      - app_network
+
+  product_service:
+    container_name: product_service
+    build:
+      context: ./Product
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    restart: always
+    command: npm run start
+    env_file:
+      - .env
+
+    networks:
+      - app_network
+
+  front-end:
+    container_name: front-end
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env
+    restart: always
+    command: npm run dev
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+
