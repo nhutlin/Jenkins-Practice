@@ -13,7 +13,25 @@ pipeline {
                 checkout scm
             }
         }
-        
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                sh "sonar-scanner \
+                -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} \
+                -Dsonar.sources=. \
+                -Dsonar.host.url= http://sonar-stag.group18.site \
+                "
+                }
+            }
+        }
+            
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: false
+                }
+            }
+        }
         stage('Build and Push Docker Image') {
             steps {
                 script {
@@ -35,26 +53,6 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                sh "sonar-scanner \
-                -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} \
-                -Dsonar.sources=. \
-                -Dsonar.host.url= http://sonar-stag.group18.site \
-                "
-                }
-            }
-        }
-            
-        stage("Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: false
-                }
-            }
-        }
-        
         stage('Start Services with Docker Compose') {
             steps {
                 script {
