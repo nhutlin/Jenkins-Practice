@@ -16,7 +16,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                sh "sonar-scanner \
+                sh "/opt/sonar-scanner/bin/sonar-scanner \
                     -Dsonar.projectKey=DevOps_Project \
                     -Dsonar.sources=. \
                     -Dsonar.host.url= https://sonar-stag.group18.site \
