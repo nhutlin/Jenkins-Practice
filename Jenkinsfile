@@ -35,25 +35,25 @@ pipeline {
                 }
             }
         }
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         withSonarQubeEnv('SonarQube') {
-        //         sh "sonar-scanner \
-        //         -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-        //         -Dsonar.sources=. \
-        //         -Dsonar.host.url=http://192.168.30.113:9000 \
-        //         "
-        //         }
-        //     }
-        // }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                sh "sonar-scanner \
+                -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} \
+                -Dsonar.sources=. \
+                -Dsonar.host.url= http://sonar-stag.group18.site \
+                "
+                }
+            }
+        }
             
-        // stage("Quality Gate") {
-        //     steps {
-        //         timeout(time: 1, unit: 'HOURS') {
-        //         waitForQualityGate abortPipeline: false
-        //         }
-        //     }
-        // }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: false
+                }
+            }
+        }
         
         stage('Start Services with Docker Compose') {
             steps {

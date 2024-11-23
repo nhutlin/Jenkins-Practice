@@ -8,9 +8,6 @@ router.get('/:idOrName', productController.findProduct);
 
 router.post('/', productController.createProduct);
 
-router.get("/", (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); // Hoặc cấu hình cụ thể
-    res.json({ message: "Products endpoint" });
-  });
+router.get('/products', productController.getProducts)
 
 module.exports = router;
