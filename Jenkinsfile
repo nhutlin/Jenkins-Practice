@@ -19,7 +19,7 @@ pipeline {
                 sh "/opt/sonar-scanner/bin/sonar-scanner \
                     -Dsonar.projectKey=DevOps_Project \
                     -Dsonar.sources=. \
-                    -Dsonar.host.url= http://3.233.167.171:9000 \
+                    -Dsonar.host.url=https://sonar-stag.group18.site \
                     -Dsonar.token=${SONAR_PROJECT_KEY} \
                 "
                 }
