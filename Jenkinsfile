@@ -13,26 +13,29 @@ pipeline {
                 checkout scm
             }
         }
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         withSonarQubeEnv('SonarQube') {
-        //         sh "/opt/sonar-scanner/bin/sonar-scanner \
-        //             -Dsonar.projectKey=DevOps_Project \
-        //             -Dsonar.sources=. \
-        //             -Dsonar.host.url=https://sonar-stag.group18.site \
-        //             -Dsonar.token=${SONAR_PROJECT_KEY} \
-        //         "
-        //         }
-        //     }
-        // }
+        stage('SonarQube Analysis') {
+            environment {
+                scannerHome = tool 'Sonar'
+            }
+            steps {
+                script {
+                    withSonarQubeEnv('Sonar') {
+                        sh "${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=DevOps_Project \
+                            -Dsonar.projectName=DevOps_Project \
+                            -Dsonar.sources=."
+                    }
+                }
+            }
+        }
             
-        // stage("Quality Gate") {
-        //     steps {
-        //         timeout(time: 1, unit: 'HOURS') {
-        //         waitForQualityGate abortPipeline: false
-        //         }
-        //     }
-        // }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: false
+                }
+            }
+        }
         stage('Build and Push Docker Image') {
             steps {
                 script {
