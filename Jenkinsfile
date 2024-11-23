@@ -20,7 +20,7 @@ pipeline {
                     -Dsonar.projectKey=DevOps_Project \
                     -Dsonar.sources=. \
                     -Dsonar.host.url= https://sonar-stag.group18.site \
-                    -Dsonar.token=${SONAR_PROJECT_KEY}
+                    -Dsonar.token=${SONAR_PROJECT_KEY} \
                 "
                 }
             }
