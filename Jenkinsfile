@@ -31,9 +31,8 @@ pipeline {
             
         stage("Quality Gate") {
             steps {
-                timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: false
-                }
+                timeout(time: 30, unit: 'MINITUES') {
+                waitForQualityGate abortPipeline: true                }
             }
         }
         stage('Build and Push Docker Image') {
@@ -63,7 +62,7 @@ pipeline {
         //--------------------------replace variable  token_github on file trivy-image-scan.sh
                 withCredentials([string(credentialsId: 'github-trivy', variable: 'TOKEN')]) {
                     sh "sed -i 's#token_github#${TOKEN}#g' trivy-image-scan.sh"      
-                    sh "sudo bash trivy-image-scan.sh"
+                    sh "bash trivy-image-scan.sh"
                 }
             }
         }

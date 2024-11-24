@@ -31,3 +31,8 @@ sudo systemctl restart docker
 sudo systemctl restart jenkins
 
 sudo apt install awscli
+
+sudo apt install nginx
+
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot

@@ -45,14 +45,14 @@ variable "instances" {
     user_data_path = string
   }))
   default = {
-    # Jenkins-Server = {
-    #   name           = "Jenkins-Server"
-    #   user_data_path = "./file/install_jenkins.sh"  # Đường dẫn đến file user data cho Jenkins Server
-    # }
+    Jenkins-Server = {
+      name           = "Jenkins-Server"
+      user_data_path = "./file/install_jenkins.sh"  
+    }
     Jenkins-Slave = {
       name           = "Jenkins-Slave"
-      user_data_path = "./file/install_java.sh"   # Đường dẫn đến file user data cho Jenkins Slave
+      user_data_path = "./file/install_java.sh" 
     }
-  }
   description = "A map of instances to create"
+  }
 }
