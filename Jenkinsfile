@@ -31,8 +31,9 @@ pipeline {
             
         stage("Quality Gate") {
             steps {
-                timeout(time: 30, unit: 'MINITUES') {
-                waitForQualityGate abortPipeline: true                }
+                timeout(time: 30, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true                
+                }
             }
         }
         stage('Build and Push Docker Image') {
