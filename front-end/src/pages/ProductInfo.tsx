@@ -10,7 +10,7 @@ function ProductInfo() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://product-service-stag.group18.site/products/${productID}", {
+        const response = await fetch("product_service:9000/products/${productID}", {
           headers: {
             "Content-Type": "application/json",
           },
@@ -30,7 +30,7 @@ function ProductInfo() {
     const token = localStorage.getItem("token");
     if (token) {
       console.log("Add to cart");
-      fetch("https://cart-service-stag.group18.site/cart/${productID}", {
+      fetch("cart_service:9003/cart/${productID}", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

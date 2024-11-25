@@ -11,7 +11,7 @@ function Login() {
     event.preventDefault();
     
     try {
-      const response = await fetch("https://user-service-stag.group18.site/users/login", {
+      const response = await fetch("user_service:9001/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

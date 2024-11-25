@@ -18,7 +18,7 @@ function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://product-service-stag.group18.site/products", {
+      const response = await fetch("product_service:9000/products", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -46,7 +46,7 @@ function Home() {
     if (selectedCategory === "idle") {
       fetchData();
     } else {
-      fetch("https://product-service-stag.group18.site/filter/category/${selectedCategory}", {
+      fetch("product_service:9000/filter/category/${selectedCategory}", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

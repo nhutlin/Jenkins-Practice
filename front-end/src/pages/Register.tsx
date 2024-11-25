@@ -15,7 +15,7 @@ function Register() {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://user-service-stag.group18.site/users", {
+      const response = await fetch("user_service:9001/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -53,7 +53,7 @@ function Register() {
     <div className="bg-img">
       <div className="registerContent">
         <header>Register Form</header>
-        <form action={"https://user-service-stag.group18.site/users"} method="post" onSubmit={handleSubmit}>
+        <form action={"user_service:9001/users"} method="post" onSubmit={handleSubmit}>
           <div className="row">
             <div className="col">
               <h6>First name</h6>
