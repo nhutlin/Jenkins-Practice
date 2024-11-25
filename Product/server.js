@@ -7,6 +7,7 @@ require('dotenv').config();
 require('./config/db_conn');
 const port = process.env.PORT || 9000;
 
+// Enable cors
 app.use(
     cors({
       origin: '*',

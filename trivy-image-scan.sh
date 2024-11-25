@@ -17,7 +17,6 @@ for dockerfile in $dockerfiles; do
 
     if [[ "${exit_code}" == 1 ]]; then
         echo "Image scanning failed. Vulnerabilities found."
-        # Log vulnerabilities but do not exit the script
         continue
     else
         echo "Image scanning passed. No CRITICAL vulnerabilities found."
