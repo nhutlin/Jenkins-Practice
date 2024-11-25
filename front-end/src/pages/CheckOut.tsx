@@ -13,7 +13,7 @@ function submitHandler(){
   const token = localStorage.getItem("token");
 
   if (token) { 
-    fetch("cart_service:9003/cart/checkout", {
+    fetch("http://cart_service:9003/cart/checkout", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

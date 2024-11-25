@@ -18,7 +18,7 @@ function Cart() {
           return;
         }
 
-        const response = await fetch("cart_service:9003/cart", {
+        const response = await fetch("http://cart_service:9003/cart", {
           headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + token,

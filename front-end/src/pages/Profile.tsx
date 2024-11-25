@@ -20,7 +20,7 @@ function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("user_service:9001/users/", {
+      fetch("http://user_service:9001/users/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
