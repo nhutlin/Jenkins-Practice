@@ -9,13 +9,11 @@ const port = process.env.PORT || 9001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-    cors({
-      origin: '*',
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true,
-    })
-  );
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+  }));
+  
 app.use("/users", require("./routes/userRouter"))
 
 
