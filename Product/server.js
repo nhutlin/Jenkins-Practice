@@ -9,8 +9,7 @@ const port = process.env.PORT || 9000;
 
 // Enable cors
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE']
+    origin: '*'
   }));
   
 app.use(express.json());
