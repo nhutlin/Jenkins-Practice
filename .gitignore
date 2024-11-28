@@ -3,3 +3,7 @@ node_modules/
 terraform/jenkins/.terraform
 terraform/jenkins/terraform.tfstate.backup
 terraform/jenkins/.terraform.lock.hcl
+
+terraform/sonarqube/.terraform
+terraform/sonarqube/terraform.tfstate.backup
+terraform/sonarqube/.terraform.lock.hcl
