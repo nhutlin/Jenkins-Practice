@@ -53,6 +53,5 @@ variable "instances" {
       name           = "Jenkins-Slave"
       user_data_path = "./file/install_java.sh" 
     }
-  description = "A map of instances to create"
   }
 }

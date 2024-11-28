@@ -17,7 +17,7 @@ resource "aws_key_pair" "lab5-keypair" {
 }
 
 module "security" {
-  source = "./modules/security"
+  source = "../modules/security"
   region = var.region
   aws_profile = var.aws_profile
   
@@ -25,7 +25,7 @@ module "security" {
 
 module "compute" {
   for_each = var.instances
-  source = "./modules/compute"
+  source = "../modules/compute"
   instances = var.instances 
   user_data = file(each.value.user_data_path)
   region = var.region
